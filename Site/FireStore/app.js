@@ -27,14 +27,16 @@ function renderCafe(doc) {
     });
 }
 
-
-db.collection('cafes').get().then((snapshot) => {
-    //console.log(snapshot.docs);
-    snapshot.docs.forEach(element => {
+//.where('city', '==', 'pasig')
+//need an index 
+//.where('city', '==', 'pasig').orderBy('name')
+// db.collection('cafes').get().then((snapshot) => {
+//     //console.log(snapshot.docs);
+//     snapshot.docs.forEach(element => {
        
-        renderCafe(element)
-    });
-})
+//         renderCafe(element)
+//     });
+// })
 
 //saving date
 form.addEventListener('submit', (e) =>{
@@ -46,3 +48,18 @@ form.addEventListener('submit', (e) =>{
     form.name.value = ''
     form.city.value = ''
 } )
+
+// real time listener
+
+db.collection('cafes').orderBy("city").onSnapshot( snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change =>{
+        if(change.type == 'added'){
+            renderCafe(change.doc);
+        }else if(change.type == 'removed'){
+            let li = cafelist.querySelector('[data-id=' + change.doc.id + ']')
+            cafelist.removeChild(li)
+        }
+        
+    })
+})
