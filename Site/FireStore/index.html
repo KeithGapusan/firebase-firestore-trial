@@ -16,17 +16,26 @@
     <body>
 
         <h1>Cloud Cafe</h1>
-
+    
         <div class="content">
-
+             <div id="content-update">
+                 <form id="update-cafe-form">
+                    <input type="text" name="id" placeholder="cafe id">                       
+                    <input type="text" name="name" placeholder="cafe name">
+                    <input type="text" name="city" placeholder="cafe city">
+                    <button> Update Cafe</button>
+                  </form>
+             </div>
             <form id="add-cafe-form">
                 <input type="text" name="name" placeholder="cafe name">
                 <input type="text" name="city" placeholder="cafe city">
                 <button> Add Cafe</button>
             </form>
+           
             <ul id="cafe-list"></ul>
 
         </div>
+        
         <script>
                 // Initialize Firebase
        // Initialize Firebase
